@@ -1,0 +1,20 @@
+{
+  "name": "coding-world",
+  "version": "1.0.0",
+  "description": "Compiler API ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd client && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rise-9813/Coding-World.git"
+  },
+  "author": "Suraj Baradhi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rise-9813/Coding-World/issues"
+  },
+  "homepage": "https://github.com/Rise-9813/Coding-World#readme"
+}
