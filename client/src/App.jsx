@@ -12,9 +12,11 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Compiler from "./components/Compiler";
 import Test from "./components/Test";
 import Login from "./components/Login";
+import axios from 'axios'
 const App = () => {
   const [landingPageData, setLandingPageData] = useState({});
   const [isAuth, setAuth] = useState(false);
+  const [response,setResponse]=useState({});
   const [user, setUser] = useState("Default");
   const Loginf = (username, pwd) => {
     if (pwd === "suraj") {
@@ -29,6 +31,12 @@ const App = () => {
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);
+
+  axios.get('/api/v1/say-something').then((res) => {
+    const response = res.data;
+    setResponse(response);
+  });
+
   return (
     <div>
       {isAuth === true ? (
@@ -43,6 +51,7 @@ const App = () => {
               <Route path="/test" component={Test} />
               <Route path="/problems" component={Problems} />
             </Switch>
+            <h5>{response.body}</h5>
             <Contact data={landingPageData.Contact} />
           </BrowserRouter>
         </div>
