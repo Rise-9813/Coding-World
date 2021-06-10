@@ -18,7 +18,7 @@ export const Header = (props) => {
                   and Java,
                 </p>
 
-                <Link to="/compiler" class="btn btn-custom btn-lg">
+                <Link to={{pathname :"/compiler", user : props.uid }} class="btn btn-custom btn-lg">
                   Lets Begin
                 </Link>
               </div>

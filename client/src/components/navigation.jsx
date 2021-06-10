@@ -30,13 +30,13 @@ export default class Navigation extends Component {
           >
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <Link to="/compiler"> Compiler </Link>
+                <Link  to={{
+                    pathname: "/compiler",
+                    user: this.props.uid
+                  }}> Compiler </Link>
               </li>
               <li>
                 <Link to="/"> About </Link>
-              </li>
-              <li>
-                <Link to="/test"> Run and Test </Link>
               </li>
               <li>
                 <Link to="/problems"> Problems </Link>
@@ -45,7 +45,17 @@ export default class Navigation extends Component {
               <li>
                 <Link to="/contact"> Team </Link>
               </li>
-
+              <li>
+              <Link
+                  to={{
+                    pathname: "/submissions",
+                    user: this.props.uid
+                  }}
+                >
+                  {" "}
+                 Submissions{" "}
+                </Link>
+              </li>
               <li class="nav-item rhs">
                 {" "}
                 <strong> Welcome {this.props.uid} !!! </strong>

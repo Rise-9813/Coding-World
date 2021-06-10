@@ -10,8 +10,12 @@ function Login({ LoginF }) {
   };
 
   return (
-    <div class="container it">
+    <div class="container-fluid it">
       <h1> WELCOME TO CODING WORLD </h1>
+      <br />
+        <br />
+        <br />
+        <br />
       <div class="container">
         <form class="frm">
           <h3>Log in</h3>
@@ -44,9 +48,14 @@ function Login({ LoginF }) {
             Sign in
           </button>
           <p className="forgot-password text-right">
-            Forgot <a href="#">password?</a>
+            Forgot <a href="#" onClick={(e)=>{
+              window.alert('How can you forget your name ??');
+            }}>password?</a>
           </p>
         </form>
+
+        <br />
+        <br />
         <br />
         <br />
         <br />

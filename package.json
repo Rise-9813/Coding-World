@@ -25,6 +25,10 @@
     "concurrently": "^6.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "nodemon": "^2.0.7"
-  }
+    "fs": "0.0.1-security",
+    "mathjs": "^9.4.2",
+    "nodemon": "^2.0.7",
+    "pg": "^8.6.0"
+  },
+  "proxy": "http://localhost:5000"
 }

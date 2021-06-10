@@ -1,34 +1,25 @@
 import React, { Component } from "react";
 import { Spinner } from "react-bootstrap";
 import "./Test.css";
+import axios from "axios";
 export default class Test extends Component {
   async submit() {
-    var fs = require("fs");
-    var fileinput = [];
-    var fileoutput = [];
+    var i = 0;
+    let res = await axios.post("http://localhost:5000/api/getIO", {
+      problem_code: this.state.problem_code
+    });
 
-    for (var i = 0; i < 2; i++) {
-      var fi = fs
-        .readFileSync(
-          `../../public/InputFiles/${this.state.problem_code}/${i}.txt`
-        )
-        .toString();
-      fileinput.push(fi);
-      var fo = fs
-        .readFileSync(
-          `../../public/OutputFiles/${this.state.problem_code}/${i}.txt`
-        )
-        .toString();
-      fileoutput.push(fo);
-    }
+    this.state.fileinput = res.data.body.inputs;
+    this.state.fileoutput = res.data.body.outputs;
+    const noi = res.data.body.outputs.length;
 
     var subarray = [];
     for (i = 0; i < 2; i++) {
       var sa = {
-        language_id: 53,
+        language_id: this.state.language_id,
         source_code: this.state.source_code,
-        stdin: fileinput[i],
-        expected_output: fileoutput[i]
+        stdin: this.state.fileinput[i],
+        expected_output: this.state.fileoutput[i]
       };
       subarray.push(sa);
     }
@@ -88,10 +79,30 @@ export default class Test extends Component {
       }
     }
 
-    console.log(jsonGetSolution[0]);
-    console.log(jsonGetSolution[1]);
     this.state.Results = jsonGetSolution;
-    this.forceUpdate();
+    const SubmissionObject = {
+      source_code: this.state.source_code,
+      verdict: "",
+      user: this.state.user,
+      language: this.state.languagew,
+      problem_code: this.state.problem_code,
+      created_on: Date.now()
+    };
+    var no_ac = 0;
+    for (i = 0; i < this.state.Results.length; i++) {
+      if (this.state.Results[i].status_id == 3) no_ac++;
+    }
+    if (no_ac == 2) SubmissionObject.verdict = "Accepted";
+    else {
+      SubmissionObject.verdict = "Wrong Answer";
+    }
+    //o.log(SubmissionObject);
+    axios
+      .post(`http://localhost:5000/api/codesubmit`,  SubmissionObject )
+      .then((res) => {
+        console.log(res);
+      });
+     this.forceUpdate();
   }
   constructor(props) {
     super(props);
@@ -100,8 +111,13 @@ export default class Test extends Component {
       this.state = {
         source_code: this.props.location.TestProps.source_code,
         language_id: this.props.location.TestProps.language_id,
-        problem_code: this.props.location.TestProps.problem_code
+        problem_code: this.props.location.TestProps.problem_code,
+        user: this.props.location.TestProps.user,
+        languagew: this.props.location.TestProps.languagew,
+        fileoutput: null,
+        fileinput: null
       };
+      console.log('User in test is ', this.props.location.TestProps.user);
       this.submit();
     } else {
       this.state = {
@@ -140,7 +156,10 @@ export default class Test extends Component {
         children.push(<td> {this.state.Results[i].time} </td>);
         children.push(<td> {this.state.Results[i].memory} </td>);
         //Create the parent and add the children
-        table.push(<tr>{children}</tr>);
+        if (this.state.Results[i].status_id === 3)
+        table.push(<tr class='table-success'>{children}</tr>);
+        else
+        table.push(<tr class='table-danger'>{children}</tr>);
       }
       return table;
     }

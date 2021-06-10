@@ -6,13 +6,14 @@ import "./Compiler.css";
 export default class Compiler extends Component {
   constructor(props) {
     super(props);
+    console.log('User in compiler is ', this.props.location.user);
     this.state = {
-      input: localStorage.getItem("input") || ``,
+      input: this.props.location.source_code || localStorage.getItem("input") || ``,
       output: ``,
-      language_id: localStorage.getItem("language_Id") || 53,
+      language_id: this.props.location.language_id || localStorage.getItem("language_Id") || 53,
       user_input: ``,
-      problem_code: `1`,
-      languagew: localStorage.getItem("languagew") || `cpp`
+      problem_code: this.props.location.problem_code || `0606A`,
+      languagew: this.props.location.languagew || localStorage.getItem("languagew") || `cpp`
     };
   }
 
@@ -22,16 +23,16 @@ export default class Compiler extends Component {
   };
   language = (event) => {
     event.preventDefault();
-    console.log("Language code ", event.target.value);
-    if (event.target.value === "53") {
-      this.setState({ language_id: event.target.value, languagew: "cpp" });
-      localStorage.setItem("languagew", "cpp");
-    }
+    let codearray = new Map();
+    codearray["53"]="cpp";
+    codearray["71"]="python";
+    codearray["62"]= "java";
+    //console.log("Language code ", event.target.value);
+   
 
-    if (event.target.value === "36") {
-      this.setState({ language_id: event.target.value, languagew: "python" });
-      localStorage.setItem("languagew", "python");
-    }
+      this.setState({ language_id: event.target.value, languagew: codearray[event.target.value] });
+      localStorage.setItem("languagew", codearray[event.target.value]);
+
     localStorage.setItem("language_Id", event.target.value);
 
     this.forceUpdate();
@@ -66,8 +67,8 @@ export default class Compiler extends Component {
     );
     outputText.innerHTML += "Submission Created ...\n";
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
-    console.log(this.state.input);
+   // console.log(jsonResponse);
+
     let jsonGetSolution = {
       status: { description: "Queue" },
       stderr: null,
@@ -96,7 +97,7 @@ export default class Compiler extends Component {
         jsonGetSolution = await getSolution.json();
       }
     }
-    console.log(jsonGetSolution);
+
     if (jsonGetSolution.stdout) {
       const output = atob(jsonGetSolution.stdout);
 
@@ -121,9 +122,10 @@ export default class Compiler extends Component {
   render() {
     return (
       <>
+      <div id="bck">
         <div class="container cmp">
           <div class="jumbotron">
-            <h1> Use our Compiler </h1>
+            <h1>  Use our compiler platform  </h1>
           </div>
           <div className="container-fluid">
             <div className="ml-4 ">
@@ -159,7 +161,9 @@ export default class Compiler extends Component {
                   TestProps: {
                     source_code: this.state.input,
                     language_id: this.state.language_id,
-                    problem_code: this.state.problem_code
+                    problem_code: this.state.problem_code,
+                    user : this.props.location.user,
+                    languagew : this.state.languagew
                   }
                 }}
                 class=" btn btn-success  "
@@ -180,9 +184,8 @@ export default class Compiler extends Component {
                 className="form-control form-inline mb-2 language"
               >
                 <option value="53">C++</option>
-                <option value="1">C</option>
-                <option value="4">Java</option>
-                <option value="36">Python</option>
+                <option value="62">Java</option>
+                <option value="71">Python</option>
               </select>
               <br />
               <label for="pbl" className="mr-1">
@@ -215,6 +218,7 @@ export default class Compiler extends Component {
             </span>
             <textarea id="output"></textarea>
           </div>
+        </div>
         </div>
       </>
     );

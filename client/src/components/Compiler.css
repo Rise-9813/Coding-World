@@ -4,6 +4,15 @@
 .heading {
   font-size: 20px;
 }
+#bck {
+  background-image:url('../img/intro-bg.jpg');
+}
+.cmp::before{
+  background-color: red;
+}
+.container-fluid{
+  padding-top: 5px;
+}
 .cmp {
   padding: 5px 5px 5px 5px;
 }

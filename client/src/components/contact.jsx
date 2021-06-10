@@ -1,6 +1,7 @@
 import { useState } from "react";
 import emailjs from "emailjs-com";
-
+import logo from "../img/team/01.jpg"
+import "./contact.css"
 const initialState = {
   name: "",
   email: "",
@@ -32,8 +33,9 @@ export const Contact = (props) => {
   };
   return (
     <div>
-      <div id="contact">
-        <div className="col-md-3 col-md-offset-1 contact-info">
+      <div id="contact" class="row">
+        <div class="col-md-9 col-md-offset-1 contact-info" id="special">
+
           <div className="contact-item">
             <h3>Contact Info</h3>
             <p>
@@ -59,6 +61,9 @@ export const Contact = (props) => {
               baradhisuraj13@gmail.com
             </p>
           </div>
+        </div>
+        < div class="col-md-3 col-md-offset-1" id='special2' >
+          <img width="200px" height="200px" src="../img/team/01.jpg" />
         </div>
       </div>
       <div id="footer">
