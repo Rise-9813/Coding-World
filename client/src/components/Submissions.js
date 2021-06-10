@@ -17,7 +17,7 @@ export default class Submissions extends Component {
 
   async componentDidMount() {  
     try {
-        let res = await axios.get("http://localhost:5000/api/getsubmit"); 
+        let res = await axios.get("/api/getsubmit"); 
         this.setState({
             submissions: res.data.body.submissions
         }); 

@@ -5,7 +5,7 @@ import axios from "axios";
 export default class Test extends Component {
   async submit() {
     var i = 0;
-    let res = await axios.post("http://localhost:5000/api/getIO", {
+    let res = await axios.post("/api/getIO", {
       problem_code: this.state.problem_code
     });
 
@@ -98,7 +98,7 @@ export default class Test extends Component {
     }
     //o.log(SubmissionObject);
     axios
-      .post(`http://localhost:5000/api/codesubmit`,  SubmissionObject )
+      .post(`/api/codesubmit`,  SubmissionObject )
       .then((res) => {
         console.log(res);
       });
