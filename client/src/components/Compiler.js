@@ -146,6 +146,7 @@ export default class Compiler extends Component {
                   localStorage.setItem("input", value);
                 }}
                 fontSize="20"
+                quickSuggestions ="false"
               />
               <br />
               <button
@@ -162,7 +163,7 @@ export default class Compiler extends Component {
                     source_code: this.state.input,
                     language_id: this.state.language_id,
                     problem_code: this.state.problem_code,
-                    user : this.props.location.user,
+                    user : localStorage.getItem("username"),
                     languagew : this.state.languagew
                   }
                 }}
@@ -216,7 +217,7 @@ export default class Compiler extends Component {
             <span class="badge badge-info heading my-2 ">
               <i class="fas fa-exclamation fa-fw fa-md"></i> Output
             </span>
-            <textarea id="output"></textarea>
+            <textarea readonly="false" id="output"></textarea>
           </div>
         </div>
         </div>

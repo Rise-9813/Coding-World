@@ -6,7 +6,7 @@ const client = new Client({
   }
 });
 client.connect();
-client.query(`insert into testcases (problem_code , no_tests ) values ( '0606B' , 2)`, (err, res) => {
+client.query(`delete from submissions where problem_code = '0606A' or problem_code ='0606B'`, (err, res) => {
   console.log(err, res) ;
   client.end() ;
 });

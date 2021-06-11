@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom';
 export default class Problems extends Component {
   render() {
     return (
@@ -35,6 +36,12 @@ export default class Problems extends Component {
       <p>A single string S of "Hello World"</p>
       < br/>
       <br/>
+      <Link class="btn btn-warning" to={
+        {
+          pathname : "/compiler",
+          problem_code : '0606A'
+        }
+      }> Try Out in Editor </Link>
       </div>
       <div class="tab-pane fade alert alert-success" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
       <h3> Maximum Element </h3>
@@ -58,6 +65,12 @@ export default class Problems extends Component {
       <p> 5 1 2 3 4 5</p>
       <p>Output : </p>
       <p>5</p>
+      <Link class="btn btn-warning" to={
+        {
+          pathname : "/compiler",
+          problem_code : '0606B'
+        }
+      }> Try Out in Editor </Link>
       </div>
     </div>
   </div>

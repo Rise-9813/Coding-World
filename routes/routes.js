@@ -86,7 +86,7 @@ const SubmitHistory = (req, res, next) => {
     }
     });
     client.connect();
-    const text = `INSERT INTO Submissions(username, source_code,language,problem_code, verdict ,created_on) VALUES($1, $2,$3,$4, $5 , current_timestamp at time zone 'asia/kolkata' ) RETURNING *`
+    const text = `INSERT INTO Submissions(username, source_code,language,problem_code, verdict ,created_on) VALUES($1, $2,$3,$4, $5 , current_timestamp  ) RETURNING *`
     const values = [req.body.user,
      req.body.source_code,req.body.language,req.body.problem_code,req.body.verdict]
     // callback

@@ -26,7 +26,7 @@ const App = () => {
   str='Default';
   const [user, setUser] = useState(str);
   const Loginf = (username, pwd) => {
-    if (pwd === "suraj" || pwd==="pravallika" ) {
+    if ( pwd==="pravallika" ) {
       setAuth(true);
       setUser(username);
       localStorage.setItem("username",username);
@@ -57,7 +57,7 @@ const App = () => {
         <div>
           <BrowserRouter>
             <Navigation uid={user} logout={Logout} />
-            <Header data={landingPageData.Header} uid={user} />
+           
             <Switch>
               <Route exact path="/" component={About} />
               <Route path="/contact" component={Team} />
