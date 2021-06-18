@@ -26,7 +26,7 @@ const App = () => {
   str='Default';
   const [user, setUser] = useState(str);
   const Loginf = (username, pwd) => {
-    if ( pwd==="pravallika" ) {
+    if ( pwd==="suraj" ) {
       setAuth(true);
       setUser(username);
       localStorage.setItem("username",username);
